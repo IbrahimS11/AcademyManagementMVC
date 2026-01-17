@@ -1,0 +1,23 @@
+﻿@model DepartmentCreateViewModel
+@{
+    ViewData["Title"] = "Edit Department";
+}
+<link rel="stylesheet" href="~/css/AddOrEditForm.css" asp-append-version="true" />
+
+
+<h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Edit Department</span></h1>
+<form asp-action="Edit" asp-controller="Department" method="post" class="form form-control">
+    <input asp-for="ID" hidden/>
+
+    <label asp-for="Name" class="form-label">Department Name </label>
+    <input asp-for="Name" class="input-group" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+    <br />
+
+    <label asp-for="Manager" class="form-label"> Manager</label>
+    <input asp-for="Manager" class="input-group" />
+    <span asp-validation-for="Manager" class="text-danger"></span>
+    <br />
+    <button type="submit" class="btn btn-primary"> Update Department </button>
+</form>
+

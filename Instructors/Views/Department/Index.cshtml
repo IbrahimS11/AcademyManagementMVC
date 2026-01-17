@@ -1,0 +1,157 @@
+﻿@model (List<Department>,DepartmentCreateViewModel);
+@{
+    ViewData["Title"] = "AllDepartment";
+}
+<h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Departments</span></h1>
+<div id="AddSection">
+    <partial name="_addDept" model="Model.Item2" />
+    
+</div>
+
+<table class="table table-success table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Details</th>
+            <th>Edit | Delete </th>
+        </tr>
+    </thead>
+    <tbody id="dataDept">
+        @foreach (var dept in Model.Item1)
+        {
+            <tr id="@dept.ID">
+                <td>@dept.ID</td>
+                <td>@dept.Name</td>
+
+                <td>
+                    <a asp-controller="Department" asp-action="Details" asp-route-id="@dept.ID" class="btn btn-info">Details</a>
+                </td>
+                <td>
+                    <a asp-controller="Department" asp-action="Edit" asp-route-id="@dept.ID" class="btn btn-warning">Edit</a>
+                    @* <a asp-controller="Course" asp-action="Delete" asp-route-id="@course.Id" class="btn btn-danger">Delete</a> *@
+                    <button class="btn btn-danger" onclick="DeleteById(@dept.ID)">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+@* <script>
+    function DeleteById(Id){
+        let result=confirm("Are you sure to delete this Course ?");
+        if(result){
+            window.location.href=`/Course/Delete/${Id}`;
+        }
+    }
+</script> *@
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function DeleteById(Id){
+        Swal.fire({
+      title: 'Are You Sure?',
+      text: "This Department Will Be Deleted",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // كود تنفيذ العملية
+        $.ajax({
+            url: "/Department/Delete/"+Id,
+            success: function(content){
+                Swal.fire({
+                title: content.title,
+                text: content.text,
+                icon: content.icon,
+                confirmButtonText: 'Ok'
+              });
+              if(content.title=="Success"){document.getElementById(Id).innerHTML="";}
+        
+        }});
+       
+
+      }
+      
+    });
+    }
+
+
+
+        function addDept() {
+          var form = $("#myForm");
+         if (!form.valid()) {
+         return; // وقف وابعدش الطلب
+          }
+        let deptData = {
+            Name: document.getElementById("DeptName").value,
+            Manager: document.getElementById("Mgr").value
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Department/Add",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(deptData),
+            success: function (dept) {
+                 //$("#summaryError").innerHTML="";
+                 document.getElementById("summaryError").value="";
+                if(dept.success){
+                 Swal.fire({
+                title: "Success",
+                text: "Department Added Successfully",
+                icon: 'success',
+                confirmButtonText: 'Ok'
+              });
+
+             document.getElementById("DeptName").value="";
+             document.getElementById("Mgr").value="";
+
+              
+             document.getElementById("dataDept").innerHTML+=`  <tr id="${dept.id}">
+                <td>${dept.id}</td>
+                <td>${dept.name}</td>
+
+                <td>
+                    <a asp-controller="Department" asp-action="Details" asp-route-id="${dept.id}" class="btn btn-info">Details</a>
+                </td>
+                <td>
+                    <a asp-controller="Department" asp-action="Edit" asp-route-id="${dept.id}" class="btn btn-warning">Edit</a>
+                  
+                    <button class="btn btn-danger" onclick="DeleteById(${dept.id})">Delete</button>
+                </td>
+            </tr>
+            `
+            }
+                 else{
+                  Swal.fire({
+                  title: "Error",
+                  text: `This Department Is Already Exist`,
+                  icon: 'error',
+                  confirmButtonText: 'Ok'
+                  });
+                 }
+           
+
+            },
+            error: function (xhr) {
+                alert("error: " + xhr.responseText);
+            }
+        });
+    }
+
+
+</script>
+
+
+
+
+
+
+

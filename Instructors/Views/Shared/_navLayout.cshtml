@@ -1,0 +1,29 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <div class="container px-5">
+        <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Dragon</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Instructor">Instructors</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Course">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Department">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Trainee">Traineies</a></li>
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-action="AddRole" asp-controller="Role">Roles</a></li>
+                    }
+                    <li><a asp-action="Logout" asp-controller="Account" class="btn btn-danger">Signout</a></li>
+                }
+                else
+                {
+                    <li><a asp-action="Login" asp-controller="Account" class="btn btn-success">Login</a></li>
+                    <span>  </span>
+                    <li><a asp-action="Register" asp-controller="Account" class="btn btn-warning">Register</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>

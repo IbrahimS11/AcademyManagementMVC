@@ -1,0 +1,13 @@
+﻿@model CourseCreateViewModel
+@{
+    ViewData["Title"] = "Edit Course";
+}
+<link rel="stylesheet" href="~/css/AddOrEditForm.css" asp-append-version="true" />
+
+
+<h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Edit Course</span></h1>
+<form asp-action="UpdateCourse" asp-controller="Course" method="post" class="form form-control">
+   
+    <partial name="_commonAddAndEdit" />
+    <button type="submit" class="btn btn-primary"> Update Course </button>
+</form>

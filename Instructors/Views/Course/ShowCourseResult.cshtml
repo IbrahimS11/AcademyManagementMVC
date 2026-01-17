@@ -1,0 +1,150 @@
+﻿@model ShowCourseResultViewModel
+@{
+    ViewData["Title"] = "ShowCourseResult";
+}
+
+<div class="container mt-5">
+    <h1 class="display-5 fw-bold text-center mb-5 text-primary">
+        <i class="bi bi-book"></i> Course Details
+    </h1>
+
+    <div class="row">
+        <!-- Left side: Course Info -->
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white fw-semibold fs-5">
+                    <i class="bi bi-info-circle"></i> Course Information
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm table-hover align-middle">
+                        <tr>
+                            <th>Course ID</th>
+                            <td>@Model.Id</td>
+                        </tr>
+                        <tr>
+                            <th>Course Name</th>
+                            <td>@Model.Name</td>
+                        </tr>
+                        <tr>
+                            <th>Department</th>
+                            <td>@Model.DepartmentName</td>
+                        </tr>
+                        <tr>
+                            <th>Degree</th>
+                            <td>@Model.Degree</td>
+                        </tr>
+                        <tr>
+                            <th>Minimum Degree</th>
+                            <td>@Model.MinDegree</td>
+                        </tr>
+                        <tr>
+                            <th>Hours</th>
+                            <td>@Model.Hours</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right side: Trainee Results -->
+        <div class="col-md-7">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-success text-white fw-semibold fs-5">
+                    <i class="bi bi-people"></i> Trainees Results
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-bordered align-middle">
+                        <thead class="table-success">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Degree</th>
+                                <th>State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var trainee in Model.ShowResultViewModels)
+                            {
+                                <tr>
+                                    <td>@trainee.Trainee_id</td>
+                                    <td>@trainee.TraineeName</td>
+                                    <td>@trainee.DegreeStudent</td>
+                                    <td style="color:@trainee.color; font-weight:600;">@trainee.Result</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* @model ShowCourseResultViewModel
+@{
+    ViewData["Title"] = "ShowCourseResult";
+}
+
+ <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Details Course</span></h1> 
+ <div  style="display:flex;">
+
+
+    <div  style="font-size:small" >
+    <table class="table table-bordered table-striped ">
+        
+            <tr>
+                <th >Course ID</th>
+                <td>@Model.Id</td>
+            </tr>
+            <tr>
+                <th >Course Name</th>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <th >Department</th>
+                <td>@Model.DepartmentName</td>
+            </tr>
+            
+                <tr>
+                    <th>Degree </th>
+                    <td>@Model.Degree</td>
+                </tr>
+                <tr>
+                    <th>Minimum Degree</th>
+                    <td>@Model.MinDegree</td>
+                </tr>
+                 <tr>
+                    <th>Hours</th>
+                    <td>@Model.Hours</td>
+                  </tr>
+
+               
+        </table>
+    </div>
+
+<div>
+<h3 class="display-5 fw-bolder mb-4"><span class="text-gradient d-inline">Trainees Results</span></h3>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th> ID</th>
+            <th> Name</th>
+            <th>Degree</th>
+            <th>State</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trainee in Model.ShowResultViewModels)
+        {
+            <tr>
+                <td>@trainee.Trainee_id</td>
+                <td>@trainee.TraineeName</td>
+                <td>@trainee.DegreeStudent</td>
+                <td style="color:@trainee.color">@trainee.Result</td>
+            </tr>
+        }
+    </tbody>
+</table>
+    </div>
+</div> *@

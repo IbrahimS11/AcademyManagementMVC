@@ -1,0 +1,43 @@
+﻿@model List<Instructor>;
+@{
+    ViewData["Title"] = "Index";
+}
+<h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Instructors</span></h1>
+
+
+<a asp-action="AddInstructor" asp-controller="Instructor" class="btn btn-success">Add Instructor</a>
+<table class="table table-primary table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Details</th>
+            <th>Delete | Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var instructor in Model)
+        {
+            <tr>
+                <td>@instructor.Id</td>
+                <td>@instructor.Name</td>
+                <td>
+                    @if(@instructor.Image != null){ <img src="~/image/@instructor.Image" alt="@instructor.Name" width="100" height="100" />}
+                    else { <img src="~/image/0.jpg" alt="@instructor.Name" width="100" height="100" />}
+                </td>
+                <td>
+                    <a asp-controller="Instructor" asp-action="Details" asp-route-id="@instructor.Id" class="btn btn-info">Details</a>
+                </td>
+                <td>
+                    <a asp-controller="Instructor" asp-action="Edit" asp-route-id="@instructor.Id" class="btn btn-warning">Edit</a>
+                    <a asp-controller="Instructor" asp-action="Delete" asp-route-id="@instructor.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+

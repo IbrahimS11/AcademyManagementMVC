@@ -1,0 +1,59 @@
+﻿@model List<Course>
+@{
+    ViewData["Title"] = "Index";
+}
+<h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Cources</span></h1>
+
+<table class="table table-success table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Details</th>
+            <th>Edit | Delete </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Id</td>
+                <td>@course.Name</td>
+                
+                <td>
+                    <a asp-controller="Course" asp-action="ShowCourseResult" asp-route-id="@course.Id" class="btn btn-info">Details</a>
+                </td>
+                <td>
+                    <a asp-controller="Course" asp-action="Edit" asp-route-id="@course.Id" class="btn btn-warning">Edit</a>
+                    @* <a asp-controller="Course" asp-action="Delete" asp-route-id="@course.Id" class="btn btn-danger">Delete</a> *@
+                    <button class="btn btn-danger" onclick="DeleteById(@course.Id)">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<br/>
+<center>
+    <a asp-controller="Course" asp-action="Index" asp-route-numberOfPage="@(ViewBag.CurrentPage-1)" class="btn btn-primary m-1"><<</a>
+    @for(int p=1;p<=ViewBag.Totalpages;p++)
+    {
+        if (p == ViewBag.CurrentPage){
+            <a asp-controller="Course" asp-action="Index" asp-route-numberOfPage="@(p - 1)" class="btn btn-primary m-0" >@p</a>
+        }
+        else
+        {
+            <a asp-controller="Course" asp-action="Index" asp-route-numberOfPage="@(p - 1)" class="btn btn-primary m-1">@p</a>
+
+        }
+    }
+    <a asp-controller="Course" asp-action="Index" asp-route-numberOfPage="@(ViewBag.CurrentPage+1)" class="btn btn-primary m-1">>></a>
+   
+     
+</center>
+
+
+
+
+

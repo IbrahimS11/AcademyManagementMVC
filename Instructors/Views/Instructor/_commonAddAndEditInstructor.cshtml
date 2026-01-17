@@ -1,0 +1,77 @@
+﻿@model InstructorCreateViewModel;
+<center>
+    <label asp-for="Name" class="form-label">Name </label>
+    <input asp-for="Name" class=" input-group-text" />
+    <span asp-validation-for="Name" class="text-danger"></span> <br />
+
+    <label asp-for="Salary" class="form-label"> Salary</label>
+    <input asp-for="Salary" class="input-group-text" />
+    <span asp-validation-for="Salary" class="text-danger"></span> <br />
+
+
+
+    <label asp-for="Address" class="form-label">Address</label>
+    <input asp-for="Address" class="input-group-text" />
+    <span asp-validation-for="Address" class="text-danger"></span> <br />
+
+
+    <label asp-for="Dept_id" class="form-label">Department Name</label>
+    <select id="DepartmentId" asp-for="Dept_id" class="input-group-text" onchange="GetCourse()">
+        @if (Model?.Departments == null || Model?.Departments.Count == 0)
+        {
+            <option disabled selected> No Departments Available </option>
+        }
+        else
+        {
+
+            <option value="0">-- Select Department --</option>
+            @foreach (var dept in Model.Departments)
+            {
+
+
+                if (dept.ID == Model.Dept_id)
+                {
+                    <option value="@dept.ID" selected> @dept.Name </option>
+                }
+                else
+                {
+                    <option value="@dept.ID"> @dept.Name </option>
+                }
+            }
+        }
+    </select>
+    <span asp-validation-for="Dept_id" class="text-danger"></span> <br />
+
+
+    <label asp-for="Crs_id" class="form-label">Coure Name</label>
+    <select id="CourseId" asp-for="Crs_id" class="input-group-text">
+        @if (Model?.Courses == null || Model?.Courses.Count == 0)
+        {
+            <option disabled selected> No Courses Available </option>
+        }
+        else
+        {
+
+            <option value="0">-- Select Course --</option>
+            @foreach (var Crs in Model.Courses)
+            {
+
+
+                if (Crs.Id == Model.Crs_id)
+                {
+                    <option value="@Crs.Id" selected> @Crs.Name </option>
+                }
+                else
+                {
+                    <option value="@Crs.Id"> @Crs.Name </option>
+                }
+            }
+        }
+    </select>
+    <span asp-validation-for="Crs_id" class="text-danger"></span> <br />
+
+
+    <button type="submit" class="btn btn-primary mt-3"> Save Instructor </button>
+
+    <div asp-validation-summary="All" class="list-group-item-danger"></div>
+</center>

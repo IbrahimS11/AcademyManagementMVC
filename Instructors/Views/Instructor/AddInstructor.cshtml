@@ -1,0 +1,34 @@
+﻿@model InstructorCreateViewModel
+@{
+    ViewData["Title"] = "AddInstructor";
+}
+
+<link rel="stylesheet" href="~/css/AddOrEditForm.css" asp-append-version="true" />
+<h1>AddInstructor</h1>
+<form asp-action="SaveInstructor" asp-controller="Instructor" method="post" class="form form-control" 
+      autocomplete="off" 
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false">
+    <partial name="_commonAddAndEditInstructor" />
+</form>
+
+<partial name="_getCrsByDeptIdUsingAjax" />
+
+
+@* <script>
+    // نحول Model.Courses إلى JSON في جافاسكريبت
+    var allCourses = @Html.Raw(Json.Serialize(Model.Courses));
+
+    $("#DepartmentId").change(function () {
+        var deptId = $(this).val();
+        $("#CourseId").empty();
+        $("#CourseId").append('<option value="">-- Select Course --</option>');
+
+        // نفلتر الكورسات حسب القسم
+        var filtered = allCourses.filter(c => c.dept_id == deptId);
+        filtered.forEach(course => {
+            $("#CourseId").append('<option value="' + course.id + '">' + course.name + '</option>');
+        });
+    });
+</script> *@

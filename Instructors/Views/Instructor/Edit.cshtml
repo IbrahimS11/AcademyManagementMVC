@@ -1,0 +1,13 @@
+﻿@model InstructorCreateViewModel
+@{
+    ViewData["Title"] = "Edit Course";
+}
+<link rel="stylesheet" href="~/css/AddOrEditForm.css" asp-append-version="true" />
+
+
+<h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">Edit Instructor</span></h1>
+<form asp-action="Edit" asp-controller="Instructor" method="post" class="form form-control">
+    <input hidden asp-for="Id" />
+    <partial name="_commonAddAndEditInstructor" />
+</form>
+<partial name="_getCrsByDeptIdUsingAjax" />

@@ -1,0 +1,49 @@
+﻿@model CourseCreateViewModel
+
+<label asp-for="Name" class="form-label">Course Name </label>
+<input asp-for="Name" class="input-group" />
+<span asp-validation-for="Name" class="text-danger"></span>
+<br />
+
+<label asp-for="Degree" class="form-label"> Degree</label>
+<input asp-for="Degree" class="input-group" />
+<span asp-validation-for="Degree" class="text-danger"></span>
+<br />
+
+<label asp-for="MinDegree" class="form-label"> Minmmum Degree</label>
+<input asp-for="MinDegree" class="input-group" />
+<span asp-validation-for="MinDegree" class="text-danger"></span>
+<br />
+
+<label asp-for="Hours" class="form-label"> Hours</label>
+<input asp-for="Hours" class="input-group" />
+<span asp-validation-for="Hours" class="text-danger"></span>
+<br />
+
+<label asp-for="Dept_id" class="form-label">Department Name</label>
+<select id="DepartmentId" asp-for="Dept_id" class="form-select">
+    @if (Model?.Departments == null || Model?.Departments.Count == 0)
+    {
+        <option disabled selected> No Departments Available </option>
+    }
+    else
+    {
+
+        <option value="0">-- Select Department --</option>
+        @foreach (var dept in Model.Departments)
+        {
+
+
+            if (dept.ID == Model.Dept_id)
+            {
+                <option value="@dept.ID" selected> @dept.Name </option>
+            }
+            else
+            {
+                <option value="@dept.ID"> @dept.Name </option>
+            }
+        }
+    }
+</select>
+<span asp-validation-for="Dept_id" class="text-danger"></span>
+<br />

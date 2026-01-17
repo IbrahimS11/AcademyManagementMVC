@@ -1,0 +1,15 @@
+﻿<script>
+    function GetCourse()
+    {
+        var DeptId=document.getElementById("DepartmentId").value;
+        var CourseId=document.getElementById("CourseId");
+        CourseId.innerHTML=`<option value="${0}"> -- Select Course -- </option>`;
+        $.ajax({url: "/Course/GetCoursesByDeptId?deptid="+DeptId, success: function(courses){
+        //console.log(result)
+        for(let c of courses ){
+            CourseId.innerHTML+=`<option value="${c.id}"> ${c.name} </option>`
+        }
+        }});
+        // console.log(DeptId);
+    }
+</script>
